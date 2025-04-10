@@ -1,0 +1,66 @@
+/* Fun & Colorful Theme */
+body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #fff9e6;
+    color: #333;
+  }
+  
+  header {
+    background-color: #ff6f61;
+    padding: 1em;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  nav {
+    background-color: #f4a261;
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    padding: 1em 0;
+  }
+  
+  nav a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.2s, color 0.3s;
+  }
+  
+  nav a:hover {
+    transform: scale(1.1);
+    color: #264653;
+  }
+  
+  main {
+    max-width: 900px;
+    margin: 2em auto;
+    padding: 1.5em;
+    background-color: #fefae0;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    color: #e76f51;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    border: 5px solid #ffb703;
+    border-radius: 20px;
+    margin-top: 1em;
+  }
+  
+  a {
+    color: #2a9d8f;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
