@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <title>Kilo HQ</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
-    /* Animated Gradient Background */
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Inter', sans-serif;
       background: linear-gradient(-45deg, #fcb045, #fd1d1d, #833ab4, #2dceda);
       background-size: 400% 400%;
       animation: gradientShift 15s ease infinite;
@@ -42,12 +41,26 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
-      transition: transform 0.3s, color 0.3s;
+      padding: 0.5em 1em;
+      border-radius: 10px;
+      transition: all 0.3s ease-in-out;
     }
 
     nav a:hover {
-      transform: scale(1.2);
-      color: #fdfd96;
+      color: white;
+      box-shadow: 0 0 20px 10px;
+    }
+
+    nav a[href="index.html"]:hover {
+      box-shadow: 0 0 20px 10px rgba(0, 123, 255, 0.5);
+    }
+
+    nav a[href="about.html"]:hover {
+      box-shadow: 0 0 20px 10px rgba(40, 167, 69, 0.5);
+    }
+
+    nav a[href="projects.html"]:hover {
+      box-shadow: 0 0 20px 10px rgba(255, 165, 0, 0.5);
     }
 
     .hero {
@@ -61,20 +74,6 @@
       margin-bottom: 1em;
     }
 
-    .hero a {
-      background-color: white;
-      color: #833ab4;
-      text-decoration: none;
-      padding: 0.8em 1.5em;
-      border-radius: 30px;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-
-    .hero a:hover {
-      background-color: #fdfd96;
-    }
-
     .section {
       max-width: 900px;
       margin: 2em auto;
@@ -82,6 +81,7 @@
       background-color: rgba(255, 255, 255, 0.1);
       border-radius: 15px;
       box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+      text-align: center;
     }
 
     .section h2 {
@@ -101,40 +101,54 @@
       color: #ddd;
     }
 
-    /* Floating Dog Emoji */
+    .footer a {
+      color: #fdfd96;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
     .dog-emoji {
       position: fixed;
       font-size: 2.5rem;
-      animation: floatDog 10s linear infinite;
       z-index: 9999;
+      transition: all 3s ease-in-out;
     }
 
-    @keyframes floatDog {
-      0% {
-        top: 10%;
-        left: -10%;
-        transform: rotate(0deg);
-      }
-      25% {
-        top: 30%;
-        left: 25%;
-        transform: rotate(10deg);
-      }
-      50% {
-        top: 50%;
-        left: 60%;
-        transform: rotate(-10deg);
-      }
-      75% {
-        top: 40%;
-        left: 85%;
-        transform: rotate(10deg);
-      }
-      100% {
-        top: 20%;
-        left: -10%;
-        transform: rotate(0deg);
-      }
+    .glow-hover {
+      display: inline-block;
+      border-radius: 15px;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .glow-hover:hover {
+      box-shadow: 0 0 20px 8px rgba(255, 215, 0, 0.7);
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+
+    blockquote.power-quote {
+      font-size: 1.3em;
+      background: rgba(0, 0, 0, 0.2);
+      color: #fff;
+      padding: 1.5em 2em;
+      border-radius: 25px;
+      margin: 1em auto 0;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 0 25px 6px rgba(255, 215, 0, 0.7);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    blockquote.power-quote:hover {
+      transform: scale(1.05);
+    }
+
+    .quote-signature {
+      margin-top: 1em;
+      max-width: 100px;
     }
   </style>
 </head>
@@ -152,29 +166,44 @@
 
   <section class="hero">
     <h1 id="type-text"></h1>
-    <a id="projects-btn" href="projects.html">See My Projects</a>
+
+    <!-- 🐉 Power Quote -->
+    <a href="https://youtu.be/_T5f8cP532c?si=YKiky7APDL7XnBSG" target="_blank" style="text-decoration: none;">
+      <blockquote class="power-quote">
+        “Power comes in response to a need, not a desire. You must create that need.”
+        <div>
+          <img src="images.jpg" alt="Goku Signature" class="quote-signature">
+        </div>
+      </blockquote>
+    </a>
   </section>
 
   <section class="section">
     <h2>About Me</h2>
     <p>Studying computer science with goals in government defense tech. I love traveling with my wife and chillin’ with Goku.</p>
-    <p><a href="about.html" style="color: #fdfd96;">→ Learn more</a></p>
+    <a href="about.html">
+      <img src="GokuKw.png" alt="Goku the Dog" class="glow-hover" style="max-width: 150px; margin-top: 1em;">
+    </a>
   </section>
 
   <section class="section">
     <h2>Projects</h2>
-    <p>Check out my <strong>Fortune Cookie Generator</strong> that drops daily wisdom, and my fast-paced <strong>Whack-a-Mole</strong> JavaFX game. Clean code, fun vibes, real results.</p>
-    <p><a href="projects.html" style="color: #fdfd96;">→ See Projects</a></p>
+    <p>Check out my Fortune Cookie Generator that drops daily wisdom, and my fast-paced Whack-a-Mole JavaFX game. Clean code, fun vibes, real results.</p>
+    <a href="projects.html">
+      <img src="teen-gohan.jpg" alt="GitHub Avatar" class="glow-hover" style="max-width: 120px; border-radius: 50%; margin-top: 1em;">
+    </a>
   </section>
 
   <div class="footer">
-    <p>Made with ☕, Goku snuggles, and late-night ideas.</p>
+    <p>
+      📸 <strong>Instagram:</strong> <a href="https://instagram.com/kilo_192" target="_blank">@kilo_192</a> |
+      🎮 <strong>Xbox:</strong> kilo_v9 |
+      💻 <strong>GitHub:</strong> <a href="https://github.com/Pkwiatkowski-ssj" target="_blank">Pkwiatkowski-ssj</a>
+    </p>
   </div>
 
-  <!-- Floating Dog Emoji -->
   <div class="dog-emoji">🐶</div>
 
-  <!-- Typewriter Effect -->
   <script>
     const text = "Welcome to my digital dojo.";
     let i = 0;
@@ -188,22 +217,31 @@
     typeWriter();
   </script>
 
-  <!-- Confetti Effect on Button Click -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-  <script>
-    const btn = document.getElementById("projects-btn");
-    btn.addEventListener("click", () => {
-      confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-    });
-  </script>
-
-  <!-- Easter Egg: Press "K" -->
+  <!-- Easter Egg -->
   <script>
     document.addEventListener("keydown", (e) => {
       if (e.key.toLowerCase() === 'k') {
-        alert("🐶 Goku says hi!");
+        alert("🐶 Goku says hi, Kilo!");
       }
     });
+  </script>
+
+  <!-- Floating Emoji -->
+  <script>
+    const dog = document.querySelector(".dog-emoji");
+    function randomFloat(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+    function moveDog() {
+      const screenW = window.innerWidth;
+      const screenH = window.innerHeight;
+      const randX = randomFloat(0, screenW - 50);
+      const randY = randomFloat(0, screenH - 50);
+      dog.style.left = `${randX}px`;
+      dog.style.top = `${randY}px`;
+    }
+    setInterval(moveDog, 3000);
+    moveDog();
   </script>
 
 </body>
