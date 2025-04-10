@@ -2,27 +2,355 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>About Me</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>About - Kilo HQ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-gradient: linear-gradient(135deg, #2d2d5a, #1d2a46);
+      --dark-gradient: linear-gradient(135deg, #000000, #0d0d0d);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Urbanist', sans-serif;
+      background: var(--main-gradient);
+      color: #f0f0f0;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 1s ease;
+    }
+
+    header, footer {
+      text-align: center;
+      padding: 1em;
+      background-color: #0f0f1a;
+      z-index: 2;
+      position: relative;
+    }
+
+    nav a {
+      color: #fdfd96;
+      margin: 0 1em;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .about-section {
+      max-width: 700px;
+      margin: 3em auto 1em auto;
+      padding: 2em;
+      background-color: #202040;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      position: relative;
+      z-index: 1;
+      display: none;
+    }
+
+    .about-section h2 {
+      color: #fdfd96;
+    }
+
+    .about-text {
+      font-size: 1.1em;
+      line-height: 1.6;
+      min-height: 100px;
+      white-space: pre-wrap;
+    }
+
+    .reveal-button {
+      display: block;
+      margin: 2em auto;
+      padding: 0.75em 1.5em;
+      font-size: 1.1em;
+      background-color: #fdfd96;
+      color: #1a1a2e;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .reveal-button:hover {
+      background-color: #ffe680;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes smokeOut {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.8); }
+    }
+
+    .ball {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fdfd96, #ff9c00);
+      font-size: 1.2em;
+      font-weight: bold;
+      color: red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 0 12px #ffcc00, 0 0 25px #ff6600;
+      position: absolute;
+      z-index: 10;
+      animation: float 3s ease-in-out infinite;
+      font-family: monospace;
+    }
+
+    .ball.clicked {
+      animation: smokeOut 0.6s ease forwards;
+    }
+
+    .shenron-message {
+      text-align: center;
+      display: none;
+      font-size: 1.5em;
+      color: #66ff66;
+      margin-top: 2em;
+      z-index: 15;
+      position: relative;
+    }
+
+    .shenron-img {
+      display: none;
+      text-align: center;
+      margin: 2em auto;
+      max-width: 100%;
+      cursor: pointer;
+      z-index: 20;
+      position: relative;
+    }
+
+    .shenron-img img {
+      max-width: 400px;
+      height: auto;
+      opacity: 0;
+      animation: riseIn 2s ease-in-out forwards;
+    }
+
+    @keyframes riseIn {
+      0% {
+        transform: translateY(100px) scale(0.5);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .terminal {
+      background: #000;
+      color: #33ff33;
+      font-family: monospace;
+      padding: 1em;
+      margin: 2em auto;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #33ff33;
+      min-height: 100px;
+    }
+
+    .memory-cards {
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+      margin: 2em auto;
+      flex-wrap: wrap;
+      max-width: 700px;
+      z-index: 1;
+      position: relative;
+    }
+
+    .card {
+      background: #29294d;
+      width: 120px;
+      height: 160px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .card:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.1em;
+      border-radius: 10px;
+    }
+
+    .card-front {
+      background: #444;
+      color: #fff;
+    }
+
+    .card-back {
+      background: #fdfd96;
+      transform: rotateY(180deg);
+    }
+
+    .card-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  </style>
 </head>
-<body>
+<body id="mainBody">
+
   <header>
-    <h1>About Me</h1>
+    <h1>About Kilo</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+    </nav>
   </header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="project.html">Projects</a>
-  </nav>
-  <main>
-    <h2>[Schooling & CS Journey]</h2>
-    <p>[Placeholder for text about you]</p>
 
-    <h2>Personal Life</h2>
-    <p>[Hobbies, favorite artist, etc.]</p>
+  <div class="terminal">
+    <div id="code-output"></div>
+  </div>
 
-    <h2>Here’s my dog Goku 🐶</h2>
-    <img src="GokuKw.png" alt="My dog Goku">
-  </main>
+  <button class="reveal-button" onclick="showAbout()">Click to reveal About Me</button>
+
+  <div class="ball" style="top: 120px; left: 40px;" onclick="collectBall(this)">*</div>
+  <div class="ball" style="top: 170px; left: 75%;" onclick="collectBall(this)">*</div>
+  <div class="ball" style="top: 220px; left: 30%;" onclick="collectBall(this)">*</div>
+  <div class="ball" style="top: 270px; left: 60%;" onclick="collectBall(this)">*</div>
+  <div class="ball" style="top: 320px; left: 20%;" onclick="collectBall(this)">*</div>
+  <div class="ball" style="top: 370px; left: 45%;" onclick="collectBall(this)">*</div>
+  <div class="ball" style="top: 420px; left: 70%;" onclick="collectBall(this)">*</div>
+
+  <div class="shenron-message" id="shenron">🌟 Shenron has been summoned. Make your wish!</div>
+  <div class="shenron-img" id="shenronImg" onclick="resetPage()">
+    <img src="https://upload.wikimedia.org/wikipedia/en/2/2b/Shenron.png" alt="Shenron Dragon">
+  </div>
+
+  <section class="about-section" id="aboutSection">
+    <h2>About Me</h2>
+    <p class="about-text" id="typed-text"></p>
+  </section>
+
+  <section class="memory-cards">
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">📸</div>
+        <div class="card-back"><img src="images/photo1.jpg" alt="Memory 1"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">🎮</div>
+        <div class="card-back"><img src="images/photo2.jpg" alt="Memory 2"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">🌍</div>
+        <div class="card-back"><img src="images/photo3.jpg" alt="Memory 3"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      📸 <strong>Instagram:</strong> <a href="https://instagram.com/kilo_192" target="_blank">@kilo_192</a> |
+      🎮 <strong>Xbox:</strong> kilo_v9 |
+      💻 <strong>GitHub:</strong> <a href="https://github.com/Pkwiatkowski-ssj" target="_blank">Pkwiatkowski-ssj</a>
+    </p>
+  </footer>
+
+  <script>
+    const messages = [
+      "Initializing terminal...",
+      "Scanning bio...",
+      "Found subject: Kilo",
+      "Class: CS Major | Specialization: Defense Tech",
+      "Interests: Goku, Gaming, Traveling",
+      "Access granted."
+    ];
+    const output = document.getElementById("code-output");
+    let index = 0;
+
+    function typeCode() {
+      if (index < messages.length) {
+        const line = document.createElement("p");
+        line.textContent = messages[index];
+        output.appendChild(line);
+        index++;
+        setTimeout(typeCode, 1200);
+      }
+    }
+    typeCode();
+
+    function showAbout() {
+      const section = document.getElementById("aboutSection");
+      section.style.display = 'block';
+      typeBio();
+    }
+
+    const bioText = `Hey there — I’m Kilo. I’m currently studying Computer Science with a focus on government defense & tech.\nI’m all about real-world impact, digital transformation, and chillin' with my dog, Goku 🐶.`;
+    let i = 0;
+    function typeBio() {
+      if (i < bioText.length) {
+        document.getElementById("typed-text").textContent += bioText.charAt(i);
+        i++;
+        setTimeout(typeBio, 40);
+      }
+    }
+
+    let collected = 0;
+    function collectBall(ball) {
+      if (!ball.classList.contains("clicked")) {
+        ball.classList.add("clicked");
+        setTimeout(() => {
+          ball.style.display = 'none';
+        }, 600);
+        collected++;
+        if (collected === 7) {
+          document.body.style.background = getComputedStyle(document.documentElement).getPropertyValue('--dark-gradient');
+          document.getElementById("shenron").style.display = "block";
+          document.getElementById("shenronImg").style.display = "block";
+        }
+      }
+    }
+
+    function resetPage() {
+      document.body.style.background = getComputedStyle(document.documentElement).getPropertyValue('--main-gradient');
+      document.getElementById("shenron").style.display = "none";
+      document.getElementById("shenronImg").style.display = "none";
+    }
+  </script>
 </body>
 </html>
