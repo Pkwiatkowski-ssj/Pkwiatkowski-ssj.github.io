@@ -4,22 +4,27 @@
   <meta charset="UTF-8">
   <title>Kilo HQ</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css22?family=Urbanist:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Urbanist', sans-serif;
       background: linear-gradient(-45deg, #fcb045, #fd1d1d, #833ab4, #2dceda);
       background-size: 400% 400%;
       animation: gradientShift 15s ease infinite;
       color: white;
       overflow-x: hidden;
+      transition: background-color 0.5s ease-in-out;
     }
 
     @keyframes gradientShift {
       0% {background-position: 0% 50%;}
       50% {background-position: 100% 50%;}
       100% {background-position: 0% 50%;}
+    }
+
+    .dark-mode {
+      background: rgb(0, 0, 0);
     }
 
     header {
@@ -139,11 +144,14 @@
       max-width: 600px;
       text-align: center;
       box-shadow: 0 0 25px 6px rgba(255, 215, 0, 0.7);
-      transition: transform 0.3s ease-in-out;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s, background-color 0.3s;
+      position: relative;
+      z-index: 10;
     }
 
     blockquote.power-quote:hover {
-      transform: scale(1.05);
+      box-shadow: 0 0 30px 10px white;
+      background-color: rgba(255, 255, 255, 0.1);
     }
 
     .quote-signature {
@@ -168,7 +176,10 @@
     <h1 id="type-text"></h1>
 
     <!-- 🐉 Power Quote -->
-    <a href="https://youtu.be/_T5f8cP532c?si=YKiky7APDL7XnBSG" target="_blank" style="text-decoration: none;">
+    <a href="https://youtu.be/_T5f8cP532c?si=YKiky7APDL7XnBSG" target="_blank" 
+       style="text-decoration: none;" 
+       onmouseover="document.body.classList.add('dark-mode')" 
+       onmouseout="document.body.classList.remove('dark-mode')">
       <blockquote class="power-quote">
         “Power comes in response to a need, not a desire. You must create that need.”
         <div>
@@ -204,6 +215,7 @@
 
   <div class="dog-emoji">🐶</div>
 
+  <!-- Typewriter -->
   <script>
     const text = "Welcome to my digital dojo.";
     let i = 0;
@@ -217,16 +229,7 @@
     typeWriter();
   </script>
 
-  <!-- Easter Egg -->
-  <script>
-    document.addEventListener("keydown", (e) => {
-      if (e.key.toLowerCase() === 'k') {
-        alert("🐶 Goku says hi, Kilo!");
-      }
-    });
-  </script>
-
-  <!-- Floating Emoji -->
+  <!-- Dog Movement -->
   <script>
     const dog = document.querySelector(".dog-emoji");
     function randomFloat(min, max) {
