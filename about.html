@@ -44,6 +44,21 @@
       -webkit-text-fill-color: transparent;
       animation: textFlow 5s linear infinite, pulseText 3s ease-in-out infinite;
       text-shadow: 0 0 10px #fff;
+
+      @keyframes auraPulse {
+
+        0%,
+        100% {
+          opacity: 0.6;
+          transform: translate(-50%, -50%) scale(1);
+        }
+
+        50% {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1.1);
+        }
+      }
+
     }
 
     nav a {
@@ -61,26 +76,111 @@
     }
 
     .about-section {
-      max-width: 700px;
+      max-width: 800px;
       margin: 3em auto 1em auto;
-      padding: 2em;
-      background-color: #202040;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      padding: 2em 2.5em;
+      background: rgb(255, 162, 0);
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1), 0 0 40px rgba(0, 255, 255, 0.2);
+      transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+      border-left: 6px solid #fdfd96;
       position: relative;
       z-index: 1;
-      display: none;
+      color: #ffffff;
+      animation: glowBorder 3s ease-in-out infinite alternate;
+    }
+
+    .about-section:hover {
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.2), 0 0 60px rgba(0, 255, 255, 0.3);
+      transform: scale(1.02);
     }
 
     .about-section h2 {
       color: #fdfd96;
+      font-size: 1.8em;
+      margin-bottom: 1em;
+      text-shadow: 0 0 5px #fdfd96;
     }
 
     .about-text {
-      font-size: 1.1em;
-      line-height: 1.6;
-      min-height: 100px;
+      font-size: 1.2em;
+      line-height: 1.7;
       white-space: pre-wrap;
+      background: linear-gradient(90deg, #fdfd96, #ff00ff, #00ffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textGlow 5s ease-in-out infinite;
+    }
+
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      background-color: #1a1a1a;
+      padding: 0.5em 1em;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      box-shadow: inset 0 -2px 6px rgba(255, 0, 255, 0.5);
+    }
+
+
+    .terminal-bar span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .red {
+      background: #ff5f56;
+    }
+
+    .yellow {
+      background: #ffbd2e;
+    }
+
+    .green {
+      background: #27c93f;
+    }
+
+    @keyframes glowBorder {
+      0% {
+        box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+      }
+
+      100% {
+        box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+      }
+    }
+
+    @keyframes textGlow {
+      0% {
+        filter: drop-shadow(0 0 2px #fdfd96);
+      }
+
+      50% {
+        filter: drop-shadow(0 0 6px #ff00ff);
+      }
+
+      100% {
+        filter: drop-shadow(0 0 2px #00ffff);
+      }
+    }
+
+    @keyframes terminalFlicker {
+      0% {
+        opacity: 1;
+      }
+
+      98% {
+        opacity: 0.95;
+      }
+
+      100% {
+        opacity: 1;
+      }
     }
 
     .reveal-button {
@@ -155,24 +255,12 @@
       max-width: 400px;
       height: auto;
       opacity: 0;
-      animation: legendaryRise 2.5s ease-in-out forwards;
-      animation-delay: 0.2s;
-      animation-fill-mode: forwards;
+      animation: none;
+      /* override any automatic animation */
       cursor: pointer;
+      transition: opacity 0.5s ease-in-out;
     }
 
-    .terminal {
-      background: #000;
-      color: #33ff33;
-      font-family: monospace;
-      padding: 1em;
-      margin: 2em auto;
-      width: 80%;
-      max-width: 600px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #33ff33;
-      min-height: 100px;
-    }
 
     .wheel-container {
       display: flex;
@@ -207,47 +295,105 @@
     }
 
     @keyframes backgroundShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.07); }
-      100% { transform: scale(1); }
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.07);
+      }
+
+      100% {
+        transform: scale(1);
+      }
     }
 
     @keyframes wheelSpin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(1440deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(1440deg);
+      }
     }
 
     @keyframes legendaryRise {
-      0% { transform: translateY(100px) scale(0.5); opacity: 0; }
-      100% { transform: translateY(0) scale(1); opacity: 1; }
+      0% {
+        transform: translateY(100px) scale(0.5);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
     }
 
     @keyframes textFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     @keyframes pulseText {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.05); opacity: 0.9; }
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
     }
 
     @keyframes headerPulse {
-      0% { box-shadow: 0 0 10px #0ff; }
-      50% { box-shadow: 0 0 30px #0ff; }
-      100% { box-shadow: 0 0 10px #0ff; }
+      0% {
+        box-shadow: 0 0 10px #0ff;
+      }
+
+      50% {
+        box-shadow: 0 0 30px #0ff;
+      }
+
+      100% {
+        box-shadow: 0 0 10px #0ff;
+      }
     }
 
     nav a {
@@ -613,7 +759,6 @@
         text-shadow: 0 0 15px #ffffff;
       }
     }
-
   </style>
 </head>
 
@@ -656,7 +801,12 @@
   </div>
 
   <section class="about-section" id="aboutSection">
-    <h2>About Me</h2>
+    <div class="terminal-bar">
+      <span class="red-dot"></span>
+      <span class="yellow-dot"></span>
+      <span class="green-dot"></span>
+    </div>
+    <h2><span style="margin-right: 0.4em;">🐉</span>About Me</h2>
     <p class="about-text" id="typed-text"></p>
   </section>
 
@@ -664,7 +814,7 @@
     <div class="wheel" onclick="spinWheel(this)"></div>
     <div id="fortune" class="fortune-message"></div>
   </div>
-  
+
   <footer>
     <p>
       📸 <strong>Instagram:</strong> <a href="https://instagram.com/kilo_192" target="_blank">@kilo_192</a> |
@@ -726,30 +876,33 @@
       section.style.display = 'block';
       typeBio();
 
-      // Shenron countdown and final message
-      const shenronMsg = document.getElementById("shenron");
-      let countdown = 3;
+      // 🐉 Only show Shenron exit countdown if he's already been summoned
+      if (shenronHasSummoned) {
+        const shenronMsg = document.getElementById("shenron");
+        let countdown = 3;
 
-      const countdownInterval = setInterval(() => {
-        if (countdown > 0) {
-          shenronMsg.innerHTML = `
-        <span style="font-size: 2em; color: #ffff66; text-shadow: 0 0 10px #ffff66;">
-          ${countdown}
-        </span>`;
-          countdown--;
-        } else {
-          clearInterval(countdownInterval);
-          shenronMsg.innerHTML = `
-        <span style="font-size: 1.8em; color: #00ff99; text-shadow: 0 0 10px #00ff99;">
-          🐉 Wish granted. Goodbye.
-        </span>`;
-          const shenronImg = document.getElementById("shenronImg");
-          setTimeout(() => {
-            shenronImg.style.transition = "opacity 2s ease";
-            shenronImg.style.opacity = "0";
-          }, 2000);
-        }
-      }, 1000);
+        const countdownInterval = setInterval(() => {
+          if (countdown > 0) {
+            shenronMsg.innerHTML = `
+          <span style="font-size: 2em; color: #ffff66; text-shadow: 0 0 10px #ffff66;">
+            ${countdown}
+          </span>`;
+            countdown--;
+          } else {
+            clearInterval(countdownInterval);
+            shenronMsg.innerHTML = `
+          <span style="font-size: 1.8em; color: #00ff99; text-shadow: 0 0 10px #00ff99;">
+            🐉 Wish granted. Goodbye.
+          </span>`;
+
+            const shenronImg = document.getElementById("shenronImg");
+            setTimeout(() => {
+              shenronImg.style.transition = "opacity 2s ease";
+              shenronImg.style.opacity = "0";
+            }, 2000);
+          }
+        }, 1000);
+      }
     }
 
 
@@ -793,6 +946,30 @@
         fortuneEl.style.animation = "fadeGlow 1s ease-in-out forwards";
       }, 2000);
     }
+    let shenronHasSummoned = false;
+    function summonShenron() {
+      const shenronText = document.getElementById("shenron");
+      const shenronImage = document.getElementById("shenronImg");
+      const shenronPic = document.getElementById("shenronPic");
+
+      shenronText.style.display = "block";
+      shenronImage.style.display = "block";
+
+      // Reset and trigger animation
+      shenronPic.style.opacity = "0";
+      shenronPic.style.animation = "none";
+      void shenronPic.offsetWidth;
+      shenronPic.style.animation = "legendaryRise 2.5s ease-in-out forwards";
+
+      // Summoning countdown (not the exit one)
+      shenronText.innerHTML = `
+    <span style="font-size: 1.8em; color: #00ff99; text-shadow: 0 0 10px #00ff99;">
+      🐉 Shenron has been summoned...
+    </span><br>
+    <span style="font-size: 1.2em; color: #66ff66; font-style: italic;">
+      “Speak your wish... that I may grant it.”
+    </span>`;
+    }
 
     let collected = 0;
     function collectBall(ball) {
@@ -804,31 +981,26 @@
         collected++;
         if (collected === 7) {
           document.body.style.background = getComputedStyle(document.documentElement).getPropertyValue('--dark-gradient');
-
-          const shenronText = document.getElementById("shenron");
-          const shenronImage = document.getElementById("shenronImg");
-          const shenronPic = document.getElementById("shenronPic");
-
-          shenronText.style.display = "block";
-          shenronImage.style.display = "block";
-
-          // Reset and trigger animation
-          shenronPic.style.opacity = "0";
-          shenronPic.style.animation = "none";
-          void shenronPic.offsetWidth; // force reflow
-          shenronPic.style.animation = "legendaryRise 2.5s ease-in-out forwards";
+          summonShenron(); // 🔥 Shenron shows up cleanly
         }
-
       }
     }
 
     function resetPage() {
-      document.body.style.background = getComputedStyle(document.documentElement).getPropertyValue('--main-gradient');
+      const body = document.body;
+
+      // Restore animated background
+      body.style.background = "linear-gradient(-45deg, #ff6ec4, #7878de, #00f0ff, #00ff94, #fff200)";
+      body.style.backgroundSize = "400% 400%";
+      body.style.animation = "backgroundShift 15s ease infinite";
+
+      // Hide Shenron
       document.getElementById("shenron").style.display = "none";
       document.getElementById("shenronImg").style.display = "none";
     }
+
   </script>
-  
+
 </body>
 
 </html>
