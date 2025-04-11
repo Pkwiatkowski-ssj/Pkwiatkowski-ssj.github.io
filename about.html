@@ -327,6 +327,18 @@
       animation: wheelSpin 2s ease-in-out forwards;
     }
 
+    @keyframes legendaryRise {
+      0% {
+        transform: translateY(100px) scale(0.5);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
     @keyframes wheelSpin {
       0% {
         transform: rotate(0deg);
@@ -402,9 +414,9 @@
     </span>
   </div>
   <div class="shenron-img" id="shenronImg" onclick="resetPage()">
-    <img src="shenron.jpg" alt="Shenron Dragon">
+    <img src="shenron2.avif" alt="Shenron Dragon" id="shenronPic">
   </div>
-  
+
   <section class="about-section" id="aboutSection">
     <h2>About Me</h2>
     <p class="about-text" id="typed-text"></p>
@@ -575,9 +587,21 @@
         collected++;
         if (collected === 7) {
           document.body.style.background = getComputedStyle(document.documentElement).getPropertyValue('--dark-gradient');
-          document.getElementById("shenron").style.display = "block";
-          document.getElementById("shenronImg").style.display = "block";
+
+          const shenronText = document.getElementById("shenron");
+          const shenronImage = document.getElementById("shenronImg");
+          const shenronPic = document.getElementById("shenronPic");
+
+          shenronText.style.display = "block";
+          shenronImage.style.display = "block";
+
+          // Reset and trigger animation
+          shenronPic.style.opacity = "0";
+          shenronPic.style.animation = "none";
+          void shenronPic.offsetWidth; // force reflow
+          shenronPic.style.animation = "legendaryRise 2.5s ease-in-out forwards";
         }
+
       }
     }
 
