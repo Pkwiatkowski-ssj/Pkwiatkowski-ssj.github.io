@@ -14,7 +14,9 @@
     body {
       margin: 0;
       font-family: 'Urbanist', sans-serif;
-      background: var(--main-gradient);
+      background: linear-gradient(-45deg, #ff6ec4, #7878de, #00f0ff, #00ff94, #fff200);
+      background-size: 400% 400%;
+      animation: backgroundShift 15s ease infinite;
       color: #f0f0f0;
       position: relative;
       min-height: 100vh;
@@ -22,13 +24,26 @@
       transition: background 1s ease;
     }
 
-    header,
-    footer {
+    header {
       text-align: center;
-      padding: 1em;
-      background-color: #0f0f1a;
-      z-index: 2;
+      padding: 2em 1em;
+      background: linear-gradient(90deg, #48d3f2, #1c1c2b);
+      border-bottom: 2px solid #fdfd96;
+      box-shadow: 0 0 15px #0400ff, 0 0 25px #0ff;
+      animation: headerPulse 4s ease-in-out infinite;
+      border-radius: 0 0 25px 25px;
       position: relative;
+      z-index: 2;
+    }
+
+    header h1 {
+      font-size: 2.8em;
+      background: linear-gradient(90deg, #fdfd96, #ff69b4, #00ffff);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textFlow 5s linear infinite, pulseText 3s ease-in-out infinite;
+      text-shadow: 0 0 10px #fff;
     }
 
     nav a {
@@ -36,11 +51,219 @@
       margin: 0 1em;
       text-decoration: none;
       font-weight: bold;
+      transition: all 0.3s ease;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      color: white;
+      text-shadow: 0 0 8px #fdfd96;
+      transform: scale(1.1);
     }
+
+    .about-section {
+      max-width: 700px;
+      margin: 3em auto 1em auto;
+      padding: 2em;
+      background-color: #202040;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 1;
+      display: none;
+    }
+
+    .about-section h2 {
+      color: #fdfd96;
+    }
+
+    .about-text {
+      font-size: 1.1em;
+      line-height: 1.6;
+      min-height: 100px;
+      white-space: pre-wrap;
+    }
+
+    .reveal-button {
+      display: block;
+      margin: 2em auto;
+      padding: 1em 2em;
+      font-size: 1.2em;
+      font-weight: bold;
+      background-color: #e60000;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+      transition: transform 0.2s ease;
+    }
+
+    .reveal-button:hover {
+      transform: scale(1.1);
+    }
+
+    #countdown {
+      text-align: center;
+      font-size: 2.5em;
+      font-weight: bold;
+      margin: 1em;
+      display: none;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .explosion {
+      text-align: center;
+      font-size: 3em;
+      color: red;
+      font-weight: bold;
+      animation: boom 0.8s ease-in-out;
+    }
+
+    .fortune-message {
+      text-align: center;
+      font-size: 1.4em;
+      font-style: italic;
+      padding: 1em;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      margin-top: 1em;
+      animation: fadeIn 1s ease-in-out;
+      color: #fdfd96;
+    }
+
+    .shenron-message {
+      text-align: center;
+      display: none;
+      font-size: 1.5em;
+      color: #66ff66;
+      margin-top: 2em;
+      z-index: 15;
+      position: relative;
+    }
+
+    .shenron-img {
+      display: none;
+      text-align: center;
+      margin: 2em auto;
+      max-width: 100%;
+      cursor: pointer;
+      z-index: 20;
+      position: relative;
+    }
+
+    .shenron-img img {
+      max-width: 400px;
+      height: auto;
+      opacity: 0;
+      animation: legendaryRise 2.5s ease-in-out forwards;
+      animation-delay: 0.2s;
+      animation-fill-mode: forwards;
+      cursor: pointer;
+    }
+
+    .terminal {
+      background: #000;
+      color: #33ff33;
+      font-family: monospace;
+      padding: 1em;
+      margin: 2em auto;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #33ff33;
+      min-height: 100px;
+    }
+
+    .wheel-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 3em auto;
+    }
+
+    .wheel {
+      width: 150px;
+      height: 150px;
+      background: conic-gradient(red, orange, yellow, green, blue, indigo, violet, red);
+      border-radius: 50%;
+      border: 4px solid #fff;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .wheel:hover {
+      animation: pulse 1s infinite;
+      box-shadow: 0 0 15px white, 0 0 25px #ff6600;
+    }
+
+    .wheel.spin {
+      animation: wheelSpin 2s ease-in-out forwards;
+    }
+
+    footer {
+      text-align: center;
+      margin: 2em auto;
+      width: 100%;
+    }
+
+    @keyframes backgroundShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.07); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes wheelSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(1440deg); }
+    }
+
+    @keyframes legendaryRise {
+      0% { transform: translateY(100px) scale(0.5); opacity: 0; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    @keyframes textFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes pulseText {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+    }
+
+    @keyframes headerPulse {
+      0% { box-shadow: 0 0 10px #0ff; }
+      50% { box-shadow: 0 0 30px #0ff; }
+      100% { box-shadow: 0 0 10px #0ff; }
+    }
+
+    nav a {
+      color: #fdfd96;
+      margin: 0 1em;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: white;
+      text-shadow: 0 0 8px #fdfd96;
+      transform: scale(1.1);
+    }
+
 
     .about-section {
       max-width: 700px;
@@ -123,6 +346,20 @@
       margin-top: 1em;
       animation: fadeIn 1s ease-in-out;
       color: #fdfd96;
+    }
+
+    @keyframes backgroundShift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     @keyframes fadeIn {
@@ -376,6 +613,7 @@
         text-shadow: 0 0 15px #ffffff;
       }
     }
+
   </style>
 </head>
 
@@ -426,28 +664,7 @@
     <div class="wheel" onclick="spinWheel(this)"></div>
     <div id="fortune" class="fortune-message"></div>
   </div>
-
-  <section class="memory-cards">
-    <div class="card">
-      <div class="card-inner">
-        <div class="card-front">📸</div>
-        <div class="card-back"><img src="images/photo1.jpg" alt="Memory 1"></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-inner">
-        <div class="card-front">🎮</div>
-        <div class="card-back"><img src="images/photo2.jpg" alt="Memory 2"></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-inner">
-        <div class="card-front">🌍</div>
-        <div class="card-back"><img src="images/photo3.jpg" alt="Memory 3"></div>
-      </div>
-    </div>
-  </section>
-
+  
   <footer>
     <p>
       📸 <strong>Instagram:</strong> <a href="https://instagram.com/kilo_192" target="_blank">@kilo_192</a> |
@@ -611,6 +828,7 @@
       document.getElementById("shenronImg").style.display = "none";
     }
   </script>
+  
 </body>
 
 </html>
