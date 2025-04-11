@@ -168,11 +168,36 @@
       margin-top: 1em;
       max-width: 100px;
     }
+
+    #music-toggle {
+  text-align: center;
+  margin: 1.5em auto;
+  padding: 0.7em 1.5em;
+  width: fit-content;
+  font-size: 1.1em;
+  font-weight: bold;
+  background: linear-gradient(90deg, #fdfd96, #00ffff);
+  color: #000;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00ffff;
+  transition: all 0.3s ease-in-out;
+}
+
+#music-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #00ffcc;
+}
+
   </style>
 </head>
 
 <body>
-
+  <audio id="bg-music" autoplay loop style="display: none;">
+    <source src="Pokemon.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  
   <header>
     <h1>Kilo HQ</h1>
   </header>
@@ -182,7 +207,10 @@
     <a href="about.html">About</a>
     <a href="projects.html">Projects</a>
   </nav>
-
+  <div id="music-toggle" onclick="playMusic()">
+    🎵 Play Music
+  </div>
+  
   <section class="hero">
     <h1 id="type-text"></h1>
 
@@ -260,6 +288,14 @@
       setInterval(moveDog, 3000);
       moveDog();
     </script>
+<script>
+  window.addEventListener('click', () => {
+    const audio = document.getElementById('bg-music');
+    if (audio.paused) {
+      audio.play();
+    }
+  }, { once: true });
+</script>
 
 </body>
 
