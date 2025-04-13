@@ -52,6 +52,10 @@
       margin-top: 2em;
     }
 
+    .projects {
+      animation: glowIn 1.5s ease-in-out forwards;
+    }
+
     .projects a {
       display: block;
       margin: 1em auto;
@@ -98,6 +102,11 @@
       animation: glitch 0.3s steps(2, end) infinite;
     }
 
+    @keyframes glowIn {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
     @keyframes surge {
       0% { background-color: black; box-shadow: 0 0 0px #00ff00; }
       25% { background-color: #001a00; box-shadow: 0 0 10px #00ff00; }
@@ -107,7 +116,7 @@
     }
 
     .surge-mode {
-      animation: surge 5s ease-in-out;
+      animation: surge 2s ease-in-out;
     }
   </style>
 </head>
@@ -141,7 +150,7 @@ for (int i = 1; i <= 15; i++) {
 
     <div class="projects" id="projects">
       <h2>Welcome to the inner sanctum.</h2>
-      <a href="https://github.com/Pkwiatkowski-ssj/Fortune-Cookie-Generator" target="_blank">🥠 Fortune Cookie Generator</a>
+      <a href="https://github.com/Pkwiatkowski-ssj/FortuneCookieGenerator" target="_blank">🥠 Fortune Cookie Generator</a>
       <a href="https://github.com/Pkwiatkowski-ssj/WhackAMoleFX" target="_blank">🎯 Whack-a-Mole Game</a>
       <p style="margin-top:2em;font-size:0.8em;color:#888;">
         <a href="index.html">🏠 Home</a>
@@ -180,10 +189,7 @@ for (int i = 1; i <= 15; i++) {
         accessSound.play();
         body.classList.add('surge-mode');
 
-        setTimeout(() => {
-          body.classList.remove('surge-mode');
-          document.getElementById('projects').style.display = 'block';
-        }, 5000);
+        document.getElementById('projects').style.display = 'block';
       } else {
         failSound.currentTime = 0;
         failSound.play();
@@ -227,4 +233,5 @@ for (int i = 1; i <= 15; i++) {
     setInterval(drawMatrix, 33);
   </script>
 </body>
+
 </html>
