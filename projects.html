@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Kilo Projects</title>
@@ -7,7 +8,7 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: monospace;
       color: #00ff00;
       background-color: black;
       overflow: hidden;
@@ -27,14 +28,16 @@
       padding-top: 5em;
     }
 
-    h1, h2 {
-      font-size: 1.6em;
+    h1,
+    h2 {
+      font-size: 2em;
       color: #0f0;
       margin-bottom: 1em;
       text-shadow: 0 0 10px #00ff00;
     }
 
-    input, button {
+    input,
+    button {
       padding: 0.5em;
       font-size: 1em;
       background: black;
@@ -43,7 +46,8 @@
       margin-top: 1em;
     }
 
-    .challenge, .projects {
+    .challenge,
+    .projects {
       display: none;
       margin-top: 2em;
     }
@@ -80,29 +84,55 @@
       color: #ccffcc;
       font-size: 0.85em;
     }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-5px, 5px); }
+      40% { transform: translate(5px, -5px); }
+      60% { transform: translate(-5px, -5px); }
+      80% { transform: translate(5px, 5px); }
+      100% { transform: translate(0); }
+    }
+
+    .glitch {
+      animation: glitch 0.3s steps(2, end) infinite;
+    }
+
+    @keyframes surge {
+      0% { background-color: black; box-shadow: 0 0 0px #00ff00; }
+      25% { background-color: #001a00; box-shadow: 0 0 10px #00ff00; }
+      50% { background-color: #002800; box-shadow: 0 0 20px #00ff00; }
+      75% { background-color: #001a00; box-shadow: 0 0 10px #00ff00; }
+      100% { background-color: black; box-shadow: 0 0 0px #00ff00; }
+    }
+
+    .surge-mode {
+      animation: surge 5s ease-in-out;
+    }
   </style>
 </head>
+
 <body>
   <canvas id="matrix"></canvas>
 
-  <div class="container">
-    <h1 id="prompt">Who dares enter the digital dojo of Kilo?</h1>
-    <input type="text" id="nameInput" placeholder="State your name, challenger">
+  <div class="container" id="mainContainer">
+    <h1 id="prompt">Who dares enter my domain?</h1>
+    <input type="text" id="nameInput" placeholder="Enter your name">
     <button onclick="startChallenge()">Continue</button>
 
     <div class="challenge" id="challenge">
-      <h2 id="welcomeText">You must prove yourself worthy by completing this sacred logic.</h2>
-      <p style="font-size: 1em; color: #0f0;">Complete the missing lines in this Java FizzBuzz code:</p>
+      <h2 id="welcomeText"></h2>
+      <p>Prove your worth!</p>
       <pre>
 for (int i = 1; i <= 15; i++) {
-  if (<input type="text" id="condition1" style="width: 220px">) {
+  if (<input id="blank1" type="text" style="width:180px">) {
     System.out.println("FizzBuzz");
   } else if (i % 3 == 0) {
     System.out.println("Fizz");
   } else if (i % 5 == 0) {
     System.out.println("Buzz");
   } else {
-    <input type="text" id="condition2" style="width: 180px">
+    <input id="blank2" type="text" style="width:180px">
   }
 }
       </pre>
@@ -111,10 +141,16 @@ for (int i = 1; i <= 15; i++) {
 
     <div class="projects" id="projects">
       <h2>Welcome to the inner sanctum.</h2>
-      <a href="fortune-cookie.html">🥠 Fortune Cookie Generator</a>
-      <a href="WhackAMoleFX.html">🎯 Whack-a-Mole Game</a>
+      <a href="https://github.com/Pkwiatkowski-ssj/Fortune-Cookie-Generator" target="_blank">🥠 Fortune Cookie Generator</a>
+      <a href="https://github.com/Pkwiatkowski-ssj/WhackAMoleFX" target="_blank">🎯 Whack-a-Mole Game</a>
+      <p style="margin-top:2em;font-size:0.8em;color:#888;">
+        <a href="index.html">🏠 Home</a>
+      </p>
     </div>
   </div>
+
+  <audio id="failSound" src="gandalf.mp3"></audio>
+  <audio id="accessSound" src="access_granted1.mp3"></audio>
 
   <script>
     function startChallenge() {
@@ -124,19 +160,39 @@ for (int i = 1; i <= 15; i++) {
       document.getElementById('nameInput').style.display = 'none';
       document.querySelector('button').style.display = 'none';
 
-      document.getElementById('welcomeText').innerText = `You dare enter the digital dojo of Kilo, ${name}? You must show yourself worthy.`;
+      document.getElementById('welcomeText').innerText = `You dare enter the digital dojo of Kilo, ${name}? You must prove yourself worthy.`;
       document.getElementById('challenge').style.display = 'block';
     }
 
     function checkFizzBuzz() {
-      const c1 = document.getElementById('condition1').value.trim();
-      const c2 = document.getElementById('condition2').value.trim();
-      const correct1 = 'i % 3 == 0 && i % 5 == 0';
-      const correct2 = 'System.out.println(i);';
-      if (c1 === correct1 && c2 === correct2) {
-        document.getElementById('projects').style.display = 'block';
+      const b1 = document.getElementById('blank1').value.trim();
+      const b2 = document.getElementById('blank2').value.trim();
+      const correct1 = "i % 3 == 0 && i % 5 == 0";
+      const correct2 = "System.out.println(i);";
+
+      const container = document.getElementById('mainContainer');
+      const body = document.body;
+      const accessSound = document.getElementById('accessSound');
+      const failSound = document.getElementById('failSound');
+
+      if (b1 === correct1 && b2 === correct2) {
+        accessSound.currentTime = 0;
+        accessSound.play();
+        body.classList.add('surge-mode');
+
+        setTimeout(() => {
+          body.classList.remove('surge-mode');
+          document.getElementById('projects').style.display = 'block';
+        }, 5000);
       } else {
-        alert('Incorrect! Try again...');
+        failSound.currentTime = 0;
+        failSound.play();
+        body.classList.add('glitch');
+
+        setTimeout(() => {
+          body.classList.remove('glitch');
+          location.reload();
+        }, 7000);
       }
     }
 

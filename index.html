@@ -1,302 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <title>Kilo HQ</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css22?family=Urbanist:wght@300;500;700&display=swap" rel="stylesheet">
+  <title>Kilo Projects</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Urbanist', sans-serif;
-      background: linear-gradient(-45deg, #f01010, #0167ff, #ff00f7, #0a9a19);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
-      color: white;
-      overflow-x: hidden;
-      transition: background-color 0.5s ease-in-out;
+      padding: 0;
+      font-family: monospace;
+      color: #00ff00;
+      background-color: black;
+      overflow: hidden;
     }
 
-    @keyframes gradientShift {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    .dark-mode {
-      background: rgb(0, 0, 0);
-    }
-
-    header {
-      text-align: center;
-      padding: 2em;
-      background-color: rgba(0, 0, 0, 0.3);
-      border-bottom: 1px solid white;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 2em;
-      padding: 1em;
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 0.5em 1em;
-      border-radius: 10px;
-      transition: all 0.3s ease-in-out;
-    }
-
-    nav a:hover {
-      color: white;
-      box-shadow: 0 0 20px 10px;
-    }
-
-    nav a[href="index.html"]:hover {
-      box-shadow: 0 0 20px 10px rgba(0, 123, 255, 0.5);
-    }
-
-    nav a[href="about.html"]:hover {
-      box-shadow: 0 0 20px 10px rgba(40, 167, 69, 0.5);
-    }
-
-    nav a[href="projects.html"]:hover {
-      box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.5);
-    }
-
-    .hero {
-      text-align: center;
-      padding: 4em 2em;
-    }
-
-    #type-text {
-      font-size: 2em;
-      font-weight: bold;
-      margin-bottom: 1em;
-    }
-
-    .section {
-      max-width: 900px;
-      margin: 2em auto;
-      padding: 2em;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
-      text-align: center;
-    }
-
-    .section h2 {
-      color: #fff;
-      margin-bottom: 0.5em;
-    }
-
-    .section p {
-      font-size: 1.1em;
-      color: #eee;
-    }
-
-    .footer {
-      text-align: center;
-      padding: 2em;
-      font-size: 0.9em;
-      color: #ddd;
-    }
-
-    .footer a {
-      color: #f5f502;
-      text-decoration: none;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
-    .dog-emoji {
+    canvas {
       position: fixed;
-      font-size: 2.5rem;
-      z-index: 9999;
-      transition: all 3s ease-in-out;
+      top: 0;
+      left: 0;
+      z-index: 0;
     }
 
-    .glow-hover {
-      display: inline-block;
-      border-radius: 15px;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-    }
-
-    blockquote.power-quote:hover {
-      box-shadow: 0 0 30px 15px rgba(255, 255, 255, 0.6);
-      background-color: rgba(0, 0, 0, 0.6);
-      transform: scale(1.03);
-    }
-
-
-    blockquote.power-quote {
-      font-size: 1.3em;
-      background: rgba(0, 0, 0, 0.2);
-      color: #fff;
-      padding: 1.5em 2em;
-      border-radius: 25px;
-      margin: 1em auto 0;
-      max-width: 600px;
-      text-align: center;
-      box-shadow: 0 0 25px 6px rgb(255, 217, 0);
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s, background-color 0.3s;
+    .container {
       position: relative;
-      z-index: 10;
+      z-index: 1;
+      text-align: center;
+      padding-top: 5em;
     }
 
-    blockquote.power-quote:hover {
-      box-shadow: 0 0 30px 10px white;
-      background-color: rgba(255, 255, 255, 0.1);
+    h1, h2 {
+      font-size: 2em;
+      color: #0f0;
+      margin-bottom: 1em;
+      text-shadow: 0 0 10px #00ff00;
     }
 
-    .quote-signature {
+    input, button {
+      padding: 0.5em;
+      font-size: 1em;
+      background: black;
+      border: 1px solid #0f0;
+      color: #0f0;
       margin-top: 1em;
-      max-width: 100px;
     }
 
-    #music-toggle {
-  text-align: center;
-  margin: 1.5em auto;
-  padding: 0.7em 1.5em;
-  width: fit-content;
-  font-size: 1.1em;
-  font-weight: bold;
-  background: linear-gradient(90deg, #fdfd96, #00ffff);
-  color: #000;
-  border-radius: 12px;
-  cursor: pointer;
-  box-shadow: 0 0 15px #00ffff;
-  transition: all 0.3s ease-in-out;
-}
+    .challenge, .projects {
+      display: none;
+      margin-top: 2em;
+    }
 
-#music-toggle:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px #00ffcc;
-}
+    .projects a {
+      display: block;
+      margin: 1em auto;
+      font-size: 1.3em;
+      color: #00ffcc;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 0.75em 1.5em;
+      border: 2px solid #00ffff;
+      border-radius: 8px;
+      width: max-content;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #00ffff;
+    }
 
+    .projects a:hover {
+      color: #000;
+      background: #00ffff;
+      box-shadow: 0 0 20px white;
+    }
+
+    pre {
+      text-align: left;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 1em;
+      max-width: 600px;
+      margin: 2em auto;
+      border: 2px solid #00ff00;
+      box-shadow: 0 0 20px #00ff00;
+      color: #ccffcc;
+      font-size: 0.9em;
+    }
+
+    .access-granted {
+      font-size: 2em;
+      color: #00ffcc;
+      text-shadow: 0 0 20px #00ffff;
+      animation: flicker 2s linear;
+      margin-top: 2em;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    .glitch {
+      animation: glitch 0.4s ease-in-out;
+    }
+
+    @keyframes glitch {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.02) rotate(1deg); }
+      50% { transform: scale(0.98) rotate(-1deg); }
+      75% { transform: scale(1.02) rotate(1deg); }
+      100% { transform: scale(1); }
+    }
   </style>
 </head>
-
 <body>
-  <audio id="bg-music" autoplay loop style="display: none;">
-    <source src="Pokemon.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-  
-  <header>
-    <h1>Kilo HQ</h1>
-  </header>
+  <canvas id="matrix"></canvas>
+  <div class="container">
+    <h1 id="prompt">Who dares enter my domain?</h1>
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <button onclick="startChallenge()">Continue</button>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="projects.html">Projects</a>
-  </nav>
-  <div id="music-toggle" onclick="playMusic()">
-    🎵 Play Music
-  </div>
-  
-  <section class="hero">
-    <h1 id="type-text"></h1>
-
-    <!-- 🐉 Power Quote -->
-    <blockquote class="power-quote">
-      “Power comes in response to a need, not a desire. You must create that need.”
-      <div>
-        <a href="https://youtu.be/_T5f8cP532c?si=YKiky7APDL7XnBSG" target="_blank" style="text-decoration: none;">
-
-          <img src="images.jpg" alt="Goku Signature" class="quote-signature">
-        </a>
-      </div>
-    </blockquote>
-
-
-    <section class="section">
-      <h2>About Me</h2>
-      <p>Studying computer science with goals in government defense tech. I love traveling with my wife and chillin’
-        with
-        Goku.</p>
-      <a href="about.html">
-        <img src="GokuKw.png" alt="Goku the Dog" class="glow-hover" style="max-width: 150px; margin-top: 1em;">
-      </a>
-    </section>
-
-    <section class="section">
-      <h2>Projects</h2>
-      <p>Check out my Fortune Cookie Generator that drops daily wisdom, and my fast-paced Whack-a-Mole JavaFX game.
-        Clean
-        code, fun vibes, real results.</p>
-      <a href="projects.html">
-        <img src="teen-gohan.jpg" alt="GitHub Avatar" class="glow-hover"
-          style="max-width: 120px; border-radius: 50%; margin-top: 1em;">
-      </a>
-    </section>
-
-    <div class="footer">
-      <p>
-        📸 <strong>Instagram:</strong> <a href="https://instagram.com/kilo_192" target="_blank">@kilo_192</a> |
-        🎮 <strong>Xbox:</strong> kilo_v9 |
-        💻 <strong>GitHub:</strong> <a href="https://github.com/Pkwiatkowski-ssj" target="_blank">Pkwiatkowski-ssj</a>
-      </p>
+    <div class="challenge" id="challenge">
+      <h2 id="welcomeText"></h2>
+      <p>You dare enter the digital dojo of Kilo? You must prove yourself worthy. Complete this FizzBuzz test:</p>
+      <pre>
+for (int i = 1; i <= 15; i++) {
+  if (<input id="blank1" placeholder="condition here">) {
+    System.out.println("FizzBuzz");
+  } else if (i % 3 == 0) {
+    System.out.println("Fizz");
+  } else if (i % 5 == 0) {
+    System.out.println("Buzz");
+  } else {
+    <input id="blank2" placeholder="print i">
+  }
+}
+      </pre>
+      <button onclick="checkFizzBuzz()">Submit Answer</button>
     </div>
 
-    <div class="dog-emoji">🐶</div>
+    <div class="projects" id="projects">
+      <div class="access-granted">ACCESS GRANTED</div>
+      <h2>Welcome to the inner sanctum.</h2>
+      <a href="https://github.com/Pkwiatkowski-ssj/fortune-cookie" target="_blank">🥠 Fortune Cookie Generator</a>
+      <a href="https://github.com/Pkwiatkowski-ssj/WhackAMoleFX" target="_blank">🎯 Whack-a-Mole Game</a>
+      <br>
+      <a href="index.html">Return to Home</a> | <a href="about.html">About</a>
+    </div>
+  </div>
+  <audio id="voiceClip" src="access-granted.mp3"></audio>
 
-    <!-- Typewriter -->
-    <script>
-      const text = "Welcome to my digital dojo.";
-      let i = 0;
-      function typeWriter() {
-        if (i < text.length) {
-          document.getElementById("type-text").innerHTML += text.charAt(i);
-          i++;
-          setTimeout(typeWriter, 50);
-        }
-      }
-      typeWriter();
-    </script>
+  <script>
+    function startChallenge() {
+      const name = document.getElementById('nameInput').value.trim();
+      if (!name) return;
+      document.getElementById('prompt').style.display = 'none';
+      document.getElementById('nameInput').style.display = 'none';
+      document.querySelector('button').style.display = 'none';
 
-    <!-- Dog Movement -->
-    <script>
-      const dog = document.querySelector(".dog-emoji");
-      function randomFloat(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-      function moveDog() {
-        const screenW = window.innerWidth;
-        const screenH = window.innerHeight;
-        const randX = randomFloat(0, screenW - 50);
-        const randY = randomFloat(0, screenH - 50);
-        dog.style.left = `${randX}px`;
-        dog.style.top = `${randY}px`;
-      }
-      setInterval(moveDog, 3000);
-      moveDog();
-    </script>
-<script>
-  window.addEventListener('click', () => {
-    const audio = document.getElementById('bg-music');
-    if (audio.paused) {
-      audio.play();
+      document.getElementById('welcomeText').innerText = `Alright, ${name}, you must pass this test...`;
+      document.getElementById('challenge').style.display = 'block';
     }
-  }, { once: true });
-</script>
 
+    function checkFizzBuzz() {
+      const b1 = document.getElementById('blank1').value.trim();
+      const b2 = document.getElementById('blank2').value.trim();
+      const correct1 = "i % 3 == 0 && i % 5 == 0";
+      const correct2 = "System.out.println(i);";
+      if (b1 === correct1 && b2 === correct2) {
+        glitchScreen();
+        setTimeout(() => {
+          document.getElementById('projects').classList.add('glitch');
+          document.getElementById('projects').style.display = 'block';
+          document.getElementById('voiceClip').play();
+        }, 1000);
+      } else {
+        alert("Thou shalt not pass!");
+      }
+    }
+
+    function glitchScreen() {
+      document.body.style.animation = 'glitch 0.5s';
+      setTimeout(() => document.body.style.animation = '', 500);
+    }
+
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "アカサタナハマヤラワABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#0F0";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height || Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 33);
+  </script>
 </body>
-
 </html>
