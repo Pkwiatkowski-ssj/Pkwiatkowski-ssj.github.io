@@ -7,7 +7,7 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: 'Courier New', monospace;
       color: #00ff00;
       background-color: black;
       overflow: hidden;
@@ -27,8 +27,8 @@
       padding-top: 5em;
     }
 
-    h1, h2 {
-      font-size: 1.6em;
+    h1, h2, h3 {
+      font-size: 2em;
       color: #0f0;
       margin-bottom: 1em;
       text-shadow: 0 0 10px #00ff00;
@@ -51,10 +51,10 @@
     .projects a {
       display: block;
       margin: 1em auto;
-      font-size: 1.3em;
+      font-size: 1.1em;
       color: #00ffcc;
       background: rgba(0, 0, 0, 0.6);
-      padding: 0.75em 1.5em;
+      padding: 0.5em 1em;
       border: 2px solid #00ffff;
       border-radius: 8px;
       width: max-content;
@@ -69,16 +69,37 @@
       box-shadow: 0 0 20px white;
     }
 
+    .back-links {
+      margin-top: 3em;
+      font-size: 0.9em;
+    }
+
+    .back-links a {
+      color: #0ff;
+      margin: 0 1em;
+      text-decoration: none;
+    }
+
     pre {
       text-align: left;
       background: rgba(0, 0, 0, 0.85);
       padding: 1em;
-      max-width: 600px;
+      max-width: 700px;
       margin: 2em auto;
       border: 2px solid #00ff00;
       box-shadow: 0 0 20px #00ff00;
       color: #ccffcc;
-      font-size: 0.85em;
+      font-size: 14px;
+    }
+
+    .code-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #0f0;
+      color: #0f0;
+      width: 80%;
+      font-family: monospace;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -86,23 +107,23 @@
   <canvas id="matrix"></canvas>
 
   <div class="container">
-    <h1 id="prompt">Who dares enter the digital dojo of Kilo?</h1>
-    <input type="text" id="nameInput" placeholder="State your name, challenger">
+    <h1 id="prompt">Who dares enter my domain?</h1>
+    <input type="text" id="nameInput" placeholder="Enter your name">
     <button onclick="startChallenge()">Continue</button>
 
     <div class="challenge" id="challenge">
-      <h2 id="welcomeText">You must prove yourself worthy by completing this sacred logic.</h2>
-      <p style="font-size: 1em; color: #0f0;">Complete the missing lines in this Java FizzBuzz code:</p>
+      <h2 id="welcomeText">You dare enter the digital dojo of Kilo? Prove your worth...</h2>
+      <p>Complete the missing lines in this Java FizzBuzz code:</p>
       <pre>
 for (int i = 1; i <= 15; i++) {
-  if (<input type="text" id="condition1" style="width: 220px">) {
+  if (<input class="code-input" id="blank1" placeholder="condition here">) {
     System.out.println("FizzBuzz");
   } else if (i % 3 == 0) {
     System.out.println("Fizz");
   } else if (i % 5 == 0) {
     System.out.println("Buzz");
   } else {
-    <input type="text" id="condition2" style="width: 180px">
+    <input class="code-input" id="blank2" placeholder="condition here">
   }
 }
       </pre>
@@ -111,10 +132,17 @@ for (int i = 1; i <= 15; i++) {
 
     <div class="projects" id="projects">
       <h2>Welcome to the inner sanctum.</h2>
-      <a href="fortune-cookie.html">🥠 Fortune Cookie Generator</a>
-      <a href="WhackAMoleFX.html">🎯 Whack-a-Mole Game</a>
+      <a href="https://github.com/Pkwiatkowski-ssj/FortuneCookieGenerator" target="_blank">🥠 Fortune Cookie Generator</a>
+      <a href="https://github.com/Pkwiatkowski-ssj/WhackAMoleFX" target="_blank">🎯 Whack-a-Mole Game</a>
+    </div>
+
+    <div class="back-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
     </div>
   </div>
+
+  <audio id="errorSound" src="gandalf.mp3" preload="auto"></audio>
 
   <script>
     function startChallenge() {
@@ -124,19 +152,22 @@ for (int i = 1; i <= 15; i++) {
       document.getElementById('nameInput').style.display = 'none';
       document.querySelector('button').style.display = 'none';
 
-      document.getElementById('welcomeText').innerText = `You dare enter the digital dojo of Kilo, ${name}? You must show yourself worthy.`;
+      document.getElementById('welcomeText').innerText = `You dare enter the digital dojo of Kilo, ${name}? Prove your worth...`;
       document.getElementById('challenge').style.display = 'block';
     }
 
     function checkFizzBuzz() {
-      const c1 = document.getElementById('condition1').value.trim();
-      const c2 = document.getElementById('condition2').value.trim();
+      const b1 = document.getElementById('blank1').value.trim();
+      const b2 = document.getElementById('blank2').value.trim();
+
       const correct1 = 'i % 3 == 0 && i % 5 == 0';
       const correct2 = 'System.out.println(i);';
-      if (c1 === correct1 && c2 === correct2) {
+
+      if (b1 === correct1 && b2 === correct2) {
         document.getElementById('projects').style.display = 'block';
       } else {
-        alert('Incorrect! Try again...');
+        document.getElementById('errorSound').play();
+        alert('Incorrect! Thou shalt not pass! Try again...');
       }
     }
 
@@ -145,7 +176,7 @@ for (int i = 1; i <= 15; i++) {
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
 
-    const letters = "アカサタナハマヤラワPHILIPKWIATKOWSKI";
+    const letters = "アカサタナハマヤラワABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     const fontSize = 16;
     const columns = canvas.width / fontSize;
     const drops = Array(Math.floor(columns)).fill(1);
