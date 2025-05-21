@@ -1,187 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <title>Kilo HQ</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css22?family=Urbanist:wght@300;500;700&display=swap" rel="stylesheet">
+  <title>Kilo HQ - Matrix Music</title>
   <style>
+    /* Matrix-style animated background */
     body {
       margin: 0;
-      font-family: 'Urbanist', sans-serif;
-      background: linear-gradient(-45deg, #f01010, #0167ff, #ff00f7, #0a9a19);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
-      color: white;
-      overflow-x: hidden;
-      transition: background-color 0.5s ease-in-out;
+      background: black;
+      overflow: hidden;
+      color: #00ff00;
+      font-family: monospace;
     }
 
-    @keyframes gradientShift {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    .dark-mode {
-      background: rgb(0, 0, 0);
-    }
-
-    header {
-      text-align: center;
-      padding: 2em;
-      background-color: rgba(0, 0, 0, 0.3);
-      border-bottom: 1px solid white;
-    }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 2em;
-      padding: 1em;
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 0.5em 1em;
-      border-radius: 10px;
-      transition: all 0.3s ease-in-out;
-    }
-
-    nav a:hover {
-      color: white;
-      box-shadow: 0 0 20px 10px;
-    }
-
-    nav a[href="index.html"]:hover {
-      box-shadow: 0 0 20px 10px rgba(0, 123, 255, 0.5);
-    }
-
-    nav a[href="about.html"]:hover {
-      box-shadow: 0 0 20px 10px rgba(40, 167, 69, 0.5);
-    }
-
-    nav a[href="projects.html"]:hover {
-      box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.5);
-    }
-
-    .hero {
-      text-align: center;
-      padding: 4em 2em;
-    }
-
-    #type-text {
-      font-size: 2em;
-      font-weight: bold;
-      margin-bottom: 1em;
-    }
-
-    .section {
-      max-width: 900px;
-      margin: 2em auto;
-      padding: 2em;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
-      text-align: center;
-    }
-
-    .section h2 {
-      color: #fff;
-      margin-bottom: 0.5em;
-    }
-
-    .section p {
-      font-size: 1.1em;
-      color: #eee;
-    }
-
-    .footer {
-      text-align: center;
-      padding: 2em;
-      font-size: 0.9em;
-      color: #ddd;
-    }
-
-    .footer a {
-      color: #f5f502;
-      text-decoration: none;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
-    .dog-emoji {
-      position: fixed;
-      font-size: 2.5rem;
-      z-index: 9999;
-      transition: all 3s ease-in-out;
-    }
-
-    .glow-hover {
-      display: inline-block;
-      border-radius: 15px;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-    }
-
-    blockquote.power-quote:hover {
-      box-shadow: 0 0 30px 15px rgba(255, 255, 255, 0.6);
-      background-color: rgba(0, 0, 0, 0.6);
-      transform: scale(1.03);
-    }
-
-
-    blockquote.power-quote {
-      font-size: 1.3em;
-      background: rgba(0, 0, 0, 0.2);
-      color: #fff;
-      padding: 1.5em 2em;
-      border-radius: 25px;
-      margin: 1em auto 0;
-      max-width: 600px;
-      text-align: center;
-      box-shadow: 0 0 25px 6px rgb(255, 217, 0);
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s, background-color 0.3s;
-      position: relative;
-      z-index: 10;
-    }
-
-    blockquote.power-quote:hover {
-      box-shadow: 0 0 30px 10px white;
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .quote-signature {
-      margin-top: 1em;
-      max-width: 100px;
+    canvas {
+      display: block;
     }
 
     #music-toggle {
-      text-align: center;
-      margin: 1.5em auto;
-      padding: 0.7em 1.5em;
-      width: fit-content;
-      font-size: 1.1em;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #00ff00;
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
       font-weight: bold;
-      background: linear-gradient(90deg, #fdfd96, #00ffff);
-      color: #000;
-      border-radius: 12px;
       cursor: pointer;
-      box-shadow: 0 0 15px #00ffff;
-      transition: all 0.3s ease-in-out;
+      z-index: 1000;
+      box-shadow: 0 0 15px #00ff00;
+      transition: all 0.3s ease;
     }
 
     #music-toggle:hover {
@@ -190,119 +39,66 @@
     }
   </style>
 </head>
-
 <body>
-  <audio id="bg-music" autoplay loop style="display: none;">
-    <source src="Pokemon.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
 
-  <header>
-    <h1>Kilo HQ</h1>
-  </header>
+<!-- Music Button -->
+<button id="music-toggle" onclick="playMusic()">🎵 Play Music</button>
+<audio id="bg-music" src="frequency.mp3" loop></audio>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="projects.html">Projects</a>
-  </nav>
-  <div id="music-toggle" onclick="playMusic()">
-    🎵 Play Music
-  </div>
+<!-- Matrix Canvas -->
+<canvas id="matrix-canvas"></canvas>
 
-  <section class="hero">
-    <h1 id="type-text"></h1>
+<script>
+  // Matrix Background
+  const canvas = document.getElementById('matrix-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
 
-    <!-- 🐉 Power Quote -->
-    <blockquote class="power-quote">
-      “Power comes in response to a need, not a desire. You must create that need.”
-      <div>
-        <a href="https://youtu.be/_T5f8cP532c?si=YKiky7APDL7XnBSG" target="_blank" style="text-decoration: none;">
+  const katakana = "アカサタナハマヤラワガザダバパイキシチニヒミリヰギジヂビピウクスツヌフムユルグズヅブプエケセテネヘメレヱゲゼデベペオコソトノホモヨロヲゴゾドボポヴ".split("");
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
 
-          <img src="images.jpg" alt="Goku Signature" class="quote-signature">
-        </a>
-      </div>
-    </blockquote>
+  function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    ctx.fillStyle = "#0F0";
+    ctx.font = fontSize + "px monospace";
 
-    <section class="section">
-      <h2>About Me</h2>
-      <p></p>
-      <a href="about.html">
-        <img src="GokuKw.png" alt="Goku the Dog" class="glow-hover" style="max-width: 150px; margin-top: 1em;">
-      </a>
-    </section>
+    for (let i = 0; i < drops.length; i++) {
+      const text = katakana[Math.floor(Math.random() * katakana.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-    <section class="section">
-      <h2>Projects</h2>
-      <p></p>
-      <a href="projects.html">
-        <img src="teen-gohan.jpg" alt="GitHub Avatar" class="glow-hover"
-          style="max-width: 120px; border-radius: 50%; margin-top: 1em;">
-      </a>
-    </section>
-
-    <div class="footer">
-      <p>
-        📸 <strong>Instagram:</strong> <a href="https://instagram.com/kilo_192" target="_blank">@kilo_192</a> |
-        🎮 <strong>Xbox:</strong> kilo_v9 |
-        💻 <strong>GitHub:</strong> <a href="https://github.com/Pkwiatkowski-ssj" target="_blank">Pkwiatkowski-ssj</a>
-      </p>
-    </div>
-
-    <div class="dog-emoji">🐶</div>
-
-    <!-- Typewriter -->
-    <script>
-      const text = "Welcome to my digital dojo.";
-      let i = 0;
-      function typeWriter() {
-        if (i < text.length) {
-          document.getElementById("type-text").innerHTML += text.charAt(i);
-          i++;
-          setTimeout(typeWriter, 50);
-        }
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
       }
-      typeWriter();
-    </script>
 
-    <!-- Dog Movement -->
-    <script>
-      const dog = document.querySelector(".dog-emoji");
-      function randomFloat(min, max) {
-        return Math.random() * (max - min) + min;
-      }
-      function moveDog() {
-        const screenW = window.innerWidth;
-        const screenH = window.innerHeight;
-        const randX = randomFloat(0, screenW - 50);
-        const randY = randomFloat(0, screenH - 50);
-        dog.style.left = `${randX}px`;
-        dog.style.top = `${randY}px`;
-      }
-      setInterval(moveDog, 3000);
-      moveDog();
-    </script>
+      drops[i]++;
+    }
+  }
 
-    <script>
-      function playMusic() {
-        const audio = document.getElementById('bg-music');
-        const button = document.getElementById('music-toggle');
+  setInterval(draw, 50);
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
 
-        if (audio.paused) {
-          audio.play();
-          button.textContent = '⏸️ Pause Music';
-        } else {
-          audio.pause();
-          button.textContent = '🎵 Play Music';
-        }
-      }
-    </script>
+  // Music Controls
+  function playMusic() {
+    const audio = document.getElementById('bg-music');
+    const button = document.getElementById('music-toggle');
 
-    <script>
-
-    </script>
+    if (audio.paused) {
+      audio.play();
+      button.textContent = '⏸️ Pause Music';
+    } else {
+      audio.pause();
+      button.textContent = '🎵 Play Music';
+    }
+  }
+</script>
 
 </body>
-
 </html>
