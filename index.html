@@ -4,12 +4,10 @@
   <meta charset="UTF-8">
   <title>Kilo HQ - Matrix Music</title>
   <style>
-    /* Matrix-style animated background */
     body {
       margin: 0;
       background: black;
       overflow: hidden;
-      color: #00ff00;
       font-family: monospace;
     }
 
@@ -21,7 +19,7 @@
       position: absolute;
       top: 20px;
       left: 20px;
-      background-color: #00ff00;
+      background-color: #00bfff; /* Deep sky blue */
       color: black;
       padding: 10px 20px;
       border: none;
@@ -29,13 +27,13 @@
       font-weight: bold;
       cursor: pointer;
       z-index: 1000;
-      box-shadow: 0 0 15px #00ff00;
+      box-shadow: 0 0 15px #00bfff;
       transition: all 0.3s ease;
     }
 
     #music-toggle:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 25px #00ffcc;
+      box-shadow: 0 0 25px #00e1ff;
     }
   </style>
 </head>
@@ -64,7 +62,7 @@
     ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "#0F0";
+    ctx.fillStyle = "#00bfff"; // Blue matrix rain
     ctx.font = fontSize + "px monospace";
 
     for (let i = 0; i < drops.length; i++) {
@@ -80,6 +78,7 @@
   }
 
   setInterval(draw, 50);
+
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
